@@ -1,4 +1,3 @@
-
 import numpy as np
 import torch
 import torch.nn as nn
@@ -13,11 +12,13 @@ import time
 import os
 from PIL import Image
 from tempfile import TemporaryDirectory
+import IndexedDataset
 
 cudnn.benchmark = True
 plt.ion()
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 data_dir = r'C:\Users\mgfee\OneDrive - Villanova University\Desktop\Sping 2024\Research\D01_G1_S1_crops\D01_G1_S1_crops'
+
 #convert to tensor for pytorch
 data_transforms = {
     'train': transforms.Compose([
@@ -128,7 +129,7 @@ def visualize_model(model, num_images=6):
                 ax = plt.subplot(num_images//2, 2, images_so_far)
                 ax.axis('off')
                 ax.set_title(f'predicted: {class_names[preds[j]]}')
-                imshow(inputs.cpu().data[j])
+                # imshow(inputs.cpu().data[j])
 
                 if images_so_far == num_images:
                     model.train(mode=was_training)
